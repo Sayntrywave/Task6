@@ -8,15 +8,18 @@ public class Main {
         List<Triple<Integer>> listOfTriples = new LinkedList<>();
 
         for (int i = 0; i < list.size(); i++) {
-            for (int j = i+1; j < list.size(); j++) {
+            for (int j = 0; j < list.size(); j++) {
                 int a = list.get(i);
                 int b = list.get(j);
-//                System.out.print(a + ", " + b + "\t");
                 int c = s - a - b;
-
+                if(a == b){
+                    if(map.get(a) == 1){
+                        continue;
+                    }
+                }
+//                System.out.print(a + ", " + b + "\t");
                 int flag = (c == a & c == b ) ? 2 : (c == a || c == b ) ? 1 : 0;
-                if (map.containsKey(c)){
-                    map.put(c,map.get(c) - flag);
+                if (map.containsKey(c) && (map.get(c) - flag > 0)){
                     if (map.get(c) > 0) {
                         listOfTriples.add(new Triple<>(a, b, c));
                     }
@@ -45,17 +48,11 @@ public class Main {
 
 
     public static void main(String[] args) {
-        List<Integer> integerList = new LinkedList<>(Arrays.asList(1,2,3,4,5,2,2));
-/*        System.out.println(integerList);
-        System.out.println(getMapFromList(integerList));*/
+        List<Integer> integerList = new LinkedList<>(Arrays.asList(1,2,3,4,5,9));
         System.out.println(getTriple(integerList, 6));
+        System.out.println(getTriple(integerList, 12));
 
-      /*  HashMap<Integer,Integer> map = new HashMap();
-        map.put(1,1);
-        map.put(2,2);
-        System.out.println(map.entrySet());
-        for (Map.Entry<Integer,Integer> o : map.entrySet()) {
 
-        }*/
+
     }
 }
